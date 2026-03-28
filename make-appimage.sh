@@ -18,7 +18,8 @@ quick-sharun \
 	/usr/bin/quickget            \
 	/usr/bin/quickreport         \
 	/usr/bin/bash                \
-	/usr/bin/zenity
+	/usr/bin/zenity              \
+	/usr/bin/spicy
 
 # Additional changes can be done in between here
 
