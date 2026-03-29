@@ -1,0 +1,38 @@
+#!/bin/sh
+
+_qemu_dir=${XDG_DATA_HOME:-~/.local/share}/QEMU-AppImage
+_qemu_msg="This AppImage requires 'qemu' and 'quickemu' in PATH. Do you wish to download those in $_qemu_dir?"
+PATH=$_qemu_dir:$PATH:${XDG_BIN_HOME:-~/.local/bin}
+export PATH
+
+_is_cmd() {
+	for cmd do
+		command -v "$cmd" 1>/dev/null || return 1
+	done
+	return 0
+}
+
+_download() {
+	if _is_cmd wget; then
+		_download_cmd="wget"
+		set -- -qO "$@"
+	elif _is_cmd curl; then
+		_download_cmd="curl"
+		set -- -Lso "$@"
+	else
+		zenity --error "ERROR: We need wget or curl to download AppImage"
+		exit 1
+	fi
+	"$_download_cmd" "$@"
+}
+
+if ! _is_cmd quickemu && zenity --question --text "$_qemu_msg"; then
+	_latest_qemu=$(_download - \
+	  https://api.github.com/repos/pkgforge-dev/QEMU-AppImage/releases \
+	  | sed 's/[()",{} ]/\n/g' | grep -o -m 1 "https.*$APPIMAGE_ARCH.*AppImage$"
+	)
+	mkdir -p "$_qemu_dir"
+	_download "$_qemu_dir"/QEMU.AppImage "$_latest_qemu"
+	chmod +x "$_qemu_dir"/QEMU.AppImage
+	( XDG_BIN_HOME="$_qemu_dir" "$_qemu_dir"/QEMU.AppImage --make-symlinks )
+fi

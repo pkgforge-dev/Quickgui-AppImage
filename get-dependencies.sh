@@ -13,7 +13,7 @@ echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano
 
 # Comment this out if you need an AUR package
-make-aur-package zenity-rs-bin
+make-aur-package zenity-gtk3
 make-aur-package quickemu
 make-aur-package quickgui-bin
 
