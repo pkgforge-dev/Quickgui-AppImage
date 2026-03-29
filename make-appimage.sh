@@ -12,7 +12,7 @@ export ICON=/usr/share/icons/hicolor/256x256/apps/quickgui.png
 export DESKTOP=/usr/share/applications/quickgui.desktop
 
 # Deploy dependencies
-quick-sharun /usr/share/quickgui/quickgui
+quick-sharun /usr/share/quickgui/quickgui /usr/bin/which
 
 # Additional changes can be done in between here
 
