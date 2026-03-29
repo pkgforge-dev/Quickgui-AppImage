@@ -10,6 +10,9 @@
   <img src="https://raw.githubusercontent.com/quickemu-project/quickgui/refs/heads/main/assets/resources/quickgui_256.png" width="128" />
 </p>
 
+Improved AppImage **independent of the host libc** making it able to work on very very old distros as well as musl-libc distros like alpine linux.
+
+Has integration with the [QEMU-AppImage](https://github.com/pkgforge-dev/QEMU-AppImage), you will be prompted to download it if you system is missing `quickemu`.
 
 | Latest Stable Release | Upstream URL |
 | :---: | :---: |
